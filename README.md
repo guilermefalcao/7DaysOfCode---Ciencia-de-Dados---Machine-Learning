@@ -58,9 +58,66 @@ python exploracao_dados.py
 python sistema_recomendacao.py
 ```
 
-### 3. Fazer Recomendações
+### 3. Fazer Recomendações (CLI)
 ```bash
 python recomendar.py --user_id 1 --n_recomendacoes 5
+```
+
+### 4. Iniciar API REST
+```bash
+python app.py
+```
+A API estará disponível em `http://localhost:5000`
+
+## 🌐 API REST
+
+### Endpoints Disponíveis:
+
+#### GET `/`
+Informações sobre a API
+
+#### GET `/health`
+Health check da API
+
+#### POST `/recomendar`
+Gera recomendações de filmes
+
+**Body (JSON):**
+```json
+{
+  "user_id": 1,
+  "n_recomendacoes": 5
+}
+```
+
+**Resposta:**
+```json
+{
+  "user_id": 1,
+  "n_recomendacoes": 5,
+  "recomendacoes": [
+    {
+      "item_id": 123,
+      "titulo": "Star Wars (1977)",
+      "rating_predito": 4.5
+    }
+  ]
+}
+```
+
+### Testar com Postman/Insomnia:
+Veja o arquivo `TESTES_API.md` para exemplos detalhados
+
+## 🐳 Docker
+
+### Construir imagem:
+```bash
+docker build -t movie-recommender-api .
+```
+
+### Executar container:
+```bash
+docker run -p 5000:5000 movie-recommender-api
 ```
 
 ## 📁 Estrutura do Projeto
@@ -71,8 +128,11 @@ python recomendar.py --user_id 1 --n_recomendacoes 5
 ├── models/                     # Modelos treinados salvos
 ├── exploracao_dados.py         # Análise exploratória
 ├── sistema_recomendacao.py     # Treinamento dos modelos
-├── recomendar.py               # Script para gerar recomendações
+├── recomendar.py               # Script CLI para recomendações
+├── app.py                      # API REST com Flask
+├── Dockerfile                  # Containerização com Docker
 ├── requirements.txt            # Dependências do projeto
+├── TESTES_API.md              # Guia de testes da API
 └── README.md                   # Este arquivo
 ```
 
@@ -82,9 +142,10 @@ python recomendar.py --user_id 1 --n_recomendacoes 5
 - **Vantagem**: Simples, diversificada
 - **Desvantagem**: Não personalizada, baixa precisão
 
-### 2. Recomendação por Popularidade
+### 2. Recomendação por Popularidade ⭐
 - **Vantagem**: Simples, funciona bem para novos usuários
 - **Desvantagem**: Viés de popularidade, não personalizada
+- **Resultado**: Melhor modelo (RMSE: 1.0210)
 
 ### 3. Filtragem Colaborativa (User-Based)
 - **Vantagem**: Personalizada, considera preferências similares
@@ -107,6 +168,10 @@ python recomendar.py --user_id 1 --n_recomendacoes 5
 
 Os modelos treinados são salvos usando `joblib` na pasta `models/`
 
+## 🏷️ Tags
+
+`#7DaysOfCode` `#MachineLearning` `#DataScience` `#Python` `#RecommendationSystem` `#Flask` `#API` `#Docker`
+
 ## 👨💻 Autor
 
-Projeto desenvolvido como parte do #7DaysOfCode de Ciência de Dados - Machine Learning
+Projeto desenvolvido como parte do **#7DaysOfCode** de Ciência de Dados - Machine Learning
