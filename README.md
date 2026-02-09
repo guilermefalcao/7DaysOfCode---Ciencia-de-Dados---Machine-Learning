@@ -69,6 +69,11 @@ python app.py
 ```
 A API estará disponível em `http://localhost:5000`
 
+### 5. Executar Teste A/B (Dia 6)
+```bash
+python dia6_teste_ab.py
+```
+
 ## 🌐 API REST
 
 ### Endpoints Disponíveis:
@@ -130,11 +135,29 @@ docker run -p 5000:5000 movie-recommender-api
 ├── sistema_recomendacao.py     # Treinamento dos modelos
 ├── recomendar.py               # Script CLI para recomendações
 ├── app.py                      # API REST com Flask
+├── dia6_teste_ab.py            # Teste A/B - Validação de Hipóteses
+├── ab_test_data.csv            # Dataset simulado do teste A/B
 ├── Dockerfile                  # Containerização com Docker
 ├── requirements.txt            # Dependências do projeto
 ├── TESTES_API.md              # Guia de testes da API
 └── README.md                   # Este arquivo
 ```
+
+## 🧪 Dia 6 - Teste A/B
+
+### Validação de Hipóteses
+Análise estatística para validar se o sistema de recomendação melhora a taxa de conversão:
+
+- **Dataset simulado**: 200 usuários divididos entre controle e treatment
+- **Métricas**: Taxa de conversão por grupo
+- **Teste estatístico**: Teste Z bicaudal para comparação de proporções
+- **Visualizações**: Gráficos de conversão, distribuição temporal
+- **P-valor**: Validação da significância estatística
+
+### Hipóteses do Teste:
+- **H0**: Taxa de conversão é igual nas duas versões
+- **H1**: Taxa de conversão é diferente entre as versões
+- **Nível de significância**: α = 0.05
 
 ## 🧠 Abordagens Implementadas
 
@@ -161,8 +184,15 @@ docker run -p 5000:5000 movie-recommender-api
 
 ## 📈 Métricas de Avaliação
 
+### Sistema de Recomendação:
 - **RMSE** (Root Mean Square Error): erro médio das predições
 - **MAE** (Mean Absolute Error): erro absoluto médio
+
+### Teste A/B:
+- **Taxa de Conversão**: proporção de usuários que converteram
+- **P-valor**: probabilidade de observar diferença por acaso
+- **Intervalo de Confiança**: faixa de valores prováveis para a diferença
+- **Estatística Z**: medida padronizada da diferença entre grupos
 
 ## 💾 Serialização do Modelo
 
